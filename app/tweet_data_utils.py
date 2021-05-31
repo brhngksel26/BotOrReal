@@ -30,6 +30,7 @@ def twint_run(serch_key,limit):
     c.Limit = limit
     c.Store_csv = True
     c.Output = filename
+    
     #Run
     twint.run.Search(c)
 
@@ -38,23 +39,23 @@ def twint_run(serch_key,limit):
 def csv_edit(filename):
     inputFileName = filename
     outputFileName = os.path.splitext(inputFileName)[0] + "_modified1.csv"
-    UPLOADS_PATH = join(dirname(realpath(inputFileName)))
 
-    with open(UPLOADS_PATH, newline='') as inFile, open(outputFileName, 'w', newline='') as outfile:
-        r = csv.reader(inFile)
-        w = csv.writer(outfile)
+    with open(inputFileName, newline='') as inFile:
+        with open(outputFileName, 'w', newline='') as outfile:
+            r = csv.reader(inFile)
+            w = csv.writer(outfile)
 
-        next(r, None)  # skip the first row from the reader, the old header
-        # write new header
-        w.writerow(["id", "conversation_id", "created_at", "date", "time", "timezone", "user_id", "username", "name", "place", "tweet"
-    , "language", "mentions", "urls", "photos", "replies_count", "retweets_count", "likes_count", "hashtags", "cashtags", "link"
-    , "retweet", "quote_url", "video", "thumbnail", "near" , "geo" , "source", "user_rt_id", "user_rt", "retweet_id", "reply_to", "retweet_date", "translate",
-    "trans_src", "trans_dest"])
-        for row in r:
-            w.writerow(row)
+            next(r, None)  # skip the first row from the reader, the old header
+            # write new header
+            w.writerow(["id", "conversation_id", "created_at", "date", "time", "timezone", "user_id", "username", "name", "place", "tweet"
+        , "language", "mentions", "urls", "photos", "replies_count", "retweets_count", "likes_count", "hashtags", "cashtags", "link"
+        , "retweet", "quote_url", "video", "thumbnail", "near" , "geo" , "source", "user_rt_id", "user_rt", "retweet_id", "reply_to", "retweet_date", "translate",
+        "trans_src", "trans_dest"])
+            for row in r:
+                w.writerow(row)
 
-    os.remove(filename)
-    return outputFileName
+        os.remove(filename)
+        return outputFileName
 
 def result(email,serch_key,tweet_count):
     csv_file = twint_run(serch_key,tweet_count)
