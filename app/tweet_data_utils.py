@@ -45,7 +45,7 @@ def csv_edit(filename):
     inputFileName = os.environ.get(filename)
     outputFileName = str(filename) + "_modified1.csv"
 
-    with open(inputFileName, newline='') as inFile:
+    with open(str(inputFileName), newline='') as inFile:
         with open(outputFileName, 'w', newline='') as outfile:
             r = csv.reader(inFile)
             w = csv.writer(outfile)
