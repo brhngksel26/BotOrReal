@@ -31,10 +31,7 @@ def twint_run(serch_key,limit):
     c.Search = serch_key
     c.Limit = limit
     c.Store_csv = True
-    c.Output = filename
-
-    app.logger.info("asdasd",os.path.abspath(filename))
-    
+    c.Output = filename  
     
     #Run
     twint.run.Search(c)
@@ -42,7 +39,7 @@ def twint_run(serch_key,limit):
     return filename
 
 def csv_edit(filename):
-    inputFileName = filename
+    inputFileName = "2021-05-31-12:07:02.534625_modified1.csv"    
     outputFileName = str(filename) + "_modified1.csv"
 
     with open(inputFileName, newline='') as inFile:
@@ -63,8 +60,9 @@ def csv_edit(filename):
         return outputFileName
 
 def result(email,serch_key,tweet_count):
-    csv_file = twint_run(serch_key,tweet_count)
-    output_file_name = csv_edit(csv_file)
+   # csv_file = twint_run(serch_key,tweet_count)
+    inputFileName = "2021-05-31-12:07:02.534625_modified1.csv"  
+    output_file_name = csv_edit(inputFileName)
 
     data = pd.read_csv(output_file_name,encoding='utf-8')
     data.drop("video",axis = 1,inplace = True )
