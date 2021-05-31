@@ -33,7 +33,7 @@ def twint_run(serch_key,limit):
     c.Store_csv = True
     c.Output = filename
 
-    app.logger.info(os.path.abspath(filename))
+    app.logger.info("asdasd",os.path.abspath(filename))
     
     
     #Run
