@@ -7,8 +7,10 @@ import datetime
 import csv
 import os
 import smtplib
-from os.path import join, dirname, realpath
 import app.auth_info 
+from flask import Flask
+
+app = Flask(__name__)
 
 
 
@@ -30,8 +32,10 @@ def twint_run(serch_key,limit):
     c.Limit = limit
     c.Store_csv = True
     c.Output = filename
+
+    app.logger.info(os.path.abspath(filename))
     
-    print(os.path.abspath(filename))
+    
     #Run
     twint.run.Search(c)
 
