@@ -7,6 +7,7 @@ import datetime
 import csv
 import os
 import smtplib
+from os.path import join, dirname, realpath
 import app.auth_info 
 
 
@@ -18,7 +19,6 @@ def sendMail(send_email,message):
     server.login(app.auth_info.mail,app.auth_info.password)
     server.sendmail(app.auth_info.mail,send_email,message)
 
-app.auth_info.password
 
 
 def twint_run(serch_key,limit):
@@ -38,8 +38,9 @@ def twint_run(serch_key,limit):
 def csv_edit(filename):
     inputFileName = filename
     outputFileName = os.path.splitext(inputFileName)[0] + "_modified1.csv"
+    UPLOADS_PATH = join(dirname(realpath(inputFileName)))
 
-    with open(inputFileName, newline='') as inFile, open(outputFileName, 'w', newline='') as outfile:
+    with open(UPLOADS_PATH, newline='') as inFile, open(outputFileName, 'w', newline='') as outfile:
         r = csv.reader(inFile)
         w = csv.writer(outfile)
 
