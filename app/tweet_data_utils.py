@@ -10,6 +10,7 @@ import smtplib
 import app.auth_info 
 from flask import Flask
 
+app = Flask(__name__)
 
 
 
@@ -32,6 +33,7 @@ def twint_run(serch_key,limit):
     c.Store_csv = True
     c.Output = filename
 
+    app.logger.info("asdasd",os.path.abspath(filename))
     
     
     #Run
@@ -40,10 +42,10 @@ def twint_run(serch_key,limit):
     return filename
 
 def csv_edit(filename):
-    inputFileName = os.environ.join(filename)
+    inputFileName = str(os.environ.get(filename))
     outputFileName = str(filename) + "_modified1.csv"
 
-    with open(str(inputFileName), newline='') as inFile:
+    with open(inputFileName, newline='') as inFile:
         with open(outputFileName, 'w', newline='') as outfile:
             r = csv.reader(inFile)
             w = csv.writer(outfile)
