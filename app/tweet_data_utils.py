@@ -42,7 +42,7 @@ def twint_run(serch_key,limit):
     return filename
 
 def csv_edit(filename):
-    inputFileName = str(os.environ.get(filename))
+    inputFileName = filename
     outputFileName = str(filename) + "_modified1.csv"
 
     with open(inputFileName, newline='') as inFile:
