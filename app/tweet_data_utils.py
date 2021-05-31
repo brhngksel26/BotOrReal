@@ -31,6 +31,7 @@ def twint_run(serch_key,limit):
     c.Store_csv = True
     c.Output = filename
     
+    print(os.path.abspath(filename))
     #Run
     twint.run.Search(c)
 
