@@ -1,1 +1,1 @@
-web: gunicorn wsgi:app  --max-requests 120000
+web: gunicorn wsgi:app  --log-level=debug --timeout=15
