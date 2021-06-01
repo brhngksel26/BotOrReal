@@ -1,1 +1,1 @@
-web: hypercorn -b 0.0.0.0:${PORT} app:wsgi
+web: gunicorn wsgi:app  --log-level=debug --timeout=5
