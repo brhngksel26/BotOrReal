@@ -1,1 +1,1 @@
-web: gunicorn wsgi:app  --max-requests 120000
+web: gunicorn wsgi:app  --timeout 60 --worker-class gevent --log-file=-
