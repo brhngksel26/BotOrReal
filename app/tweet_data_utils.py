@@ -36,7 +36,7 @@ def twint_run(serch_key,limit):
     #Run
     twint.run.Search(c)
 
-    return filename
+    return c.Output
 
 def csv_edit(filename):
     inputFileName = "2021-05-31-12:07:02.534625_modified1.csv"    
