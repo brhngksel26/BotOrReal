@@ -7,10 +7,7 @@ import datetime
 import csv
 import os
 import smtplib
-import app.auth_info 
-from flask import Flask
-
-app = Flask(__name__)
+import app.auth_info as info
 
 
 
@@ -18,8 +15,8 @@ def sendMail(send_email,message):
     message = message.encode("ascii", errors="ignore")
     server = smtplib.SMTP("smtp.gmail.com",587)
     server.starttls()
-    server.login(app.auth_info.mail,app.auth_info.password)
-    server.sendmail(app.auth_info.mail,send_email,message)
+    server.login(info.mail,info.password)
+    server.sendmail(info.mail,send_email,message)
 
 
 
