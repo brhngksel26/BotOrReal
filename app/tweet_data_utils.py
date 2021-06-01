@@ -60,9 +60,8 @@ def csv_edit(filename):
         return outputFileName
 
 def result(email,serch_key,tweet_count):
-   # csv_file = twint_run(serch_key,tweet_count)
-    inputFileName = "2021-05-31-12:07:02.534625_modified1.csv"  
-    output_file_name = csv_edit(inputFileName)
+    csv_file = twint_run(serch_key,tweet_count)
+    output_file_name = csv_edit(csv_file)
 
     data = pd.read_csv(output_file_name,encoding='utf-8')
     data.drop("video",axis = 1,inplace = True )
