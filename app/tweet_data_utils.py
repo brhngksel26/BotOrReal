@@ -56,7 +56,6 @@ def csv_edit(filename):
             for row in r:
                 w.writerow(row)
 
-        os.remove(filename)
         return outputFileName
 
 def result(email,serch_key,tweet_count):
