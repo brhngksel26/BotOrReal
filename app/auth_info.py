@@ -4,5 +4,5 @@ consumer_key = "SX3e4z5XGRbB153LA9lJ7CF7r"
 consumer_secret = "VxM4WzHXBSc52gQe3ci6bY5mwvskvE26DSFuYyqN83D3A9NkHG"
 
 
-mail = "brainsforce@gmail.com"
+mail = "info@brainsforce.com"
 password = "CodeFather26!26CodeFather"
