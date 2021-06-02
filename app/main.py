@@ -5,6 +5,7 @@ from app.tweet_data_utils import result
 from app.tweepy_utils import bot_or_not
 
 application = Flask(__name__)
+app = application
 
 @application.route('/')
 def index():
