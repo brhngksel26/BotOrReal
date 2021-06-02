@@ -3,35 +3,40 @@ from flask import Flask
 from flask import request,jsonify,render_template
 from app.tweet_data_utils import result
 from app.tweepy_utils import bot_or_not
+from threading import Thread
 
-application = Flask(__name__)
-app = application
+app = Flask(__name__)
 
-@application.route('/')
+
+
+
+@app.route('/')
 def index():
 	return render_template('hashtag.html')
 
-@application.route('/username')
+@app.route('/username')
 def username():
     return render_template('username.html')
 
-@application.route('/tweet_result', methods=['POST'])
+@app.route('/tweet_result', methods=['POST'])
 def tweet_result():
     hashtag = request.form.get('hashtag')
     tweet_count = request.form.get('tweet_count')
     email = request.form.get('email')
+    thread = Thread(target=result, args=(email,hashtag,tweet_count))
+    thread.daemon = True
+    thread.start()
+    messages = "İşlem Başlatıldı"
+    return render_template('hashtag.html', template_data = messages)
 
-    data = result(email,hashtag,tweet_count)
-    return render_template('hashtag.html', template_data = data)
 
-
-@application.route('/account_result', methods=['POST'])
+@app.route('/account_result', methods=['POST'])
 def account_result():
     hashtag = request.form.get('username')
     data_result = bot_or_not(hashtag)
     return render_template('username.html',template_data = data_result)
 
-@application.route('/hashtag',methods=['POST'])
+@app.route('/hashtag',methods=['POST'])
 def tweet_result_api():
     data = request.get_json()
     email = {'email' :data['email']}
@@ -51,7 +56,7 @@ def tweet_result_api():
     return jsonify({'messages':'işlem başlatıldı'})
 
 
-@application.route('/username',methods=['POST'])
+@app.route('/username',methods=['POST'])
 def bot_or_real_result_api():
     data = request.get_json()
     username = {'username' : data['username']}
