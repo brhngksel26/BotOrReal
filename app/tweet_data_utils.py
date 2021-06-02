@@ -36,22 +36,21 @@ def twint_run(serch_key,limit):
     return c.Output
 
 def csv_edit(filename):
-    inputFileName = "2021-05-31-12:07:02.534625_modified1.csv"    
-    outputFileName = str(filename) + "_modified1.csv"
+    inputFileName = filename
+    outputFileName = os.path.splitext(inputFileName)[0] + "_modified1.csv"
 
-    with open(inputFileName, newline='') as inFile:
-        with open(outputFileName, 'w', newline='') as outfile:
-            r = csv.reader(inFile)
-            w = csv.writer(outfile)
+    with open(inputFileName, newline='') as inFile, open(outputFileName, 'w', newline='') as outfile:
+        r = csv.reader(inFile)
+        w = csv.writer(outfile)
 
-            next(r, None)  # skip the first row from the reader, the old header
+        next(r, None)  # skip the first row from the reader, the old header
             # write new header
-            w.writerow(["id", "conversation_id", "created_at", "date", "time", "timezone", "user_id", "username", "name", "place", "tweet"
+        w.writerow(["id", "conversation_id", "created_at", "date", "time", "timezone", "user_id", "username", "name", "place", "tweet"
         , "language", "mentions", "urls", "photos", "replies_count", "retweets_count", "likes_count", "hashtags", "cashtags", "link"
         , "retweet", "quote_url", "video", "thumbnail", "near" , "geo" , "source", "user_rt_id", "user_rt", "retweet_id", "reply_to", "retweet_date", "translate",
         "trans_src", "trans_dest"])
-            for row in r:
-                w.writerow(row)
+        for row in r:
+            w.writerow(row)
 
         return outputFileName
 
