@@ -49,9 +49,10 @@ def tweet_result_api():
     tweet_count = str(tweet_count).replace("{'tweet_count': '","")
     tweet_count = str(tweet_count).replace("'}","")
 
-    hashtag = str(hashtag).replace("{'hashtag': '","")
-    hashtag = str(hashtag).replace("'}","")
-    result(email,hashtag,tweet_count)
+    
+    thread = Thread(target=result, args=(email,hashtag,tweet_count))
+    thread.daemon = True
+    thread.start()
     
     return jsonify({'messages':'işlem başlatıldı'})
 
