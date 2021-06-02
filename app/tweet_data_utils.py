@@ -13,7 +13,7 @@ import app.auth_info as info
 
 def sendMail(send_email,message):
     message = message.encode("ascii", errors="ignore")
-    server = smtplib.SMTP("mail.brainsforce.com ",465)
+    server = smtplib.SMTP("smtp.gmail.com",587)
     server.starttls()
     server.login(info.mail,info.password)
     server.sendmail(info.mail,send_email,message)
